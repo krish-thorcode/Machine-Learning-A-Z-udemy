@@ -54,3 +54,11 @@ y = labelencoder_Y.transform(y)
 
 #3. Split dataset into training and test
 X_train, X_test, y_train, y_test = model_selection.train_test_split(X, y, test_size = 0.2, random_state = 0)
+
+#4. Feature Scaling
+scaler_X = preprocessing.StandardScaler()
+#fit the standard scaling algorithm to the training set only, but use the fitted \
+#scaling algo on test set also (w/o fitting to test set)
+scaler_X = scaler_X.fit(X_train)
+X_train = scaler_X.transform(X_train)
+X_test = scaler_X.transform(X_test)
