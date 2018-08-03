@@ -36,7 +36,7 @@ regressor = regressor.fit(X_poly, y)
 y_predictions = regressor.predict(X_poly)
 
 plt.scatter(X, y, color = 'red')
-plt.plot(X, y, color = 'blue')
+plt.plot(X, y_predictions, color = 'blue')
 
 # training a linear regression model just for comparision
 linear_regressor = linear_model.LinearRegression()
