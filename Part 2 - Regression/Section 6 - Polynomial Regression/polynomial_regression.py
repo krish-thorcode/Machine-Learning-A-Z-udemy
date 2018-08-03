@@ -43,4 +43,28 @@ linear_regressor = linear_model.LinearRegression()
 linear_regressor = linear_regressor.fit(X, y)
 y_linearpred = linear_regressor.predict(X)
 plt.plot(X, y_linearpred, color = 'orange')
+
+#training a 3-degree polynomial model 
+poly_feature_creator = preprocessing.PolynomialFeatures(degree = 3)
+X_poly = poly_feature_creator.fit_transform(X)
+regressor = linear_model.LinearRegression()
+regressor = regressor.fit(X_poly, y)
+y_predictions = regressor.predict(X_poly)
+plt.plot(X, y_predictions, color = 'green')
+
+#training a 4-degree polynomial model
+poly_feature_creator = preprocessing.PolynomialFeatures(degree = 4)
+X_poly = poly_feature_creator.fit_transform(X)
+regressor = linear_model.LinearRegression()
+regressor = regressor.fit(X_poly, y)
+y_predictions = regressor.predict(X_poly)
+plt.plot(X, y_predictions, color = 'black')
 plt.show()
+
+# polynomial model with degree = 4 is selected
+# predicting for only one value, lets say 6.5
+#1. prediction by linear_regressor
+linear_regressor.predict(6.5)
+
+#2. prediction by polynomial (degree 4) regressor
+regressor.predict(poly_feature_creator.fit_transform(6.5))
