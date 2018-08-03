@@ -83,3 +83,16 @@ regressor_ols.summary()
 X_opt = X[:, [0,3,5]]
 regressor_ols = sm.OLS(endog = y, exog = X_opt).fit()
 regressor_ols.summary()
+
+# As we see from the summary obtained from the recentmost summary() \
+# the x2 feature (5th feature index of X) has the highest p-values which is 0.06. \
+# What should we do? Since the Significance level set is 0.05, should we remove \
+# it or should we not because it is not too far from the SL? This decision may \
+# be difficult to make. We have other metrics that can help us make better \
+# decisions, but since this tutorial is based on implementing Backward \
+# Elimination, we shall follow the predecided framework, ie, we shall eliminate \
+# the 5th feature index.
+
+X_opt = X[:, [0, 3]]
+regressor_ols = sm.OLS(endog = y, exog = X_opt).fit()
+regressor_ols.summary()
