@@ -37,7 +37,7 @@ y_predictions = classifier.predict(X_test)
 conf_matrix = metrics.confusion_matrix(y_test, y_predictions)
 print(conf_matrix)
 
-#Visualising training data set and decision boundary learned on training set
+#Visualising training dataset and the decision boundary(learned on training set)
 X_set, y_set = X_train, y_train
 X1, X2 = np.meshgrid(np.arange(X_set[:, 0].min() - 1, X_set[:, 0].max() + 1,\
                          step = 0.01),\
@@ -57,4 +57,24 @@ plt.title('Training set and Decision Boundary')
 plt.xlabel('X1')
 plt.ylabel('X2')
 plt.legend()
+plt.show()
+
+#Visualising test dataset and the decision boundary learned
+X_set, y_set = X_test, y_test
+X1, X2 = np.meshgrid(np.arange(X_set[:, 0].min() - 1, X_set[:, 0].max() + 1,\
+                    step = 0.01),\
+                    np.arange(X_set[:, 1].min() - 1, X_set[:, 1].max() + 1, \
+                    step = 0.01))
+    
+plt.contourf(X1, X2, classifier.predict(np.array([X1.ravel(), X2.ravel()]).T).\
+             reshape(X1.shape), alpha = 0.6, cmap = matplotlib.colors.\
+             ListedColormap(('red','green')))
+for i, j in enumerate(np.unique(y_set)):
+    plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1],\
+                c = matplotlib.colors.ListedColormap(('red','green'))(i), \
+                label = j)
+plt.title('Test set and decision boundary')
+plt.xlabel('X1')
+plt.ylabel('X2')
+plt.legend() 
 plt.show()
