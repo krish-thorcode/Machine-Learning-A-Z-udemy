@@ -71,7 +71,7 @@ for i,j in enumerate(np.unique(y_test)):
     plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1], s = 3, label = j,\
                 c = ListedColormap(('red','green'))(j))
     
-plt.title('Random Forest(training set)')
+plt.title('Random Forest(test set)')
 plt.xlabel('X1')
 plt.ylabel('X2')
 plt.legend()
