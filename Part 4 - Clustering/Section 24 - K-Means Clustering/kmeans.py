@@ -44,17 +44,17 @@ y_kmeans = kmeans.predict(X);
 
 # Visualising the clusters
 plt.scatter(X[y_kmeans == 0, 0], X[y_kmeans == 0, 1], s = 60, color = 'red',\
-            label = 'Cluster 1')
+            label = 'Cluster 1', edgecolors = 'black')
 plt.scatter(X[y_kmeans == 1, 0], X[y_kmeans == 1, 1], s = 60, color = 'blue',\
-            label = 'Cluster 2')
+            label = 'Cluster 2', edgecolors = 'black')
 plt.scatter(X[y_kmeans == 2, 0], X[y_kmeans == 2, 1], s = 60, color = 'green',\
-            label = 'Cluster 3')
-plt.scatter(X[y_kmeans == 2, 0], X[y_kmeans == 2, 1], s = 60, color = 'cyan', \
-            label = 'Cluster 4')
+            label = 'Cluster 3', edgecolors = 'black')
+plt.scatter(X[y_kmeans == 3, 0], X[y_kmeans == 3, 1], s = 60, color = 'cyan', \
+            label = 'Cluster 4', edgecolors = 'black')
 plt.scatter(X[y_kmeans == 4, 0], X[y_kmeans == 4, 1], s = 60, color = 'magenta',\
-            label = 'Cluster 5');
+            label = 'Cluster 5', edgecolors = 'black');
 plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s = 80,\
-            color = 'yellow', label = 'Centroids')
+            color = 'yellow', label = 'Centroids', edgecolors = 'black')
 plt.title('Cluster of clients')
 plt.xlabel('Annual income (k $)')
 plt.ylabel('Spending score (1-100)')
