@@ -56,3 +56,10 @@ for n in range(N):
     reward = human_simulation.values[n, temp_selected_ad] # reward = 0, if user didn't clk
     sum_of_rewards[temp_selected_ad] += reward
     total_reward += reward
+
+# Visualising the result with histograms
+plt.hist(ad_selected_each_round)
+plt.title('Histogram of number of times each ad got selected')
+plt.xlabel('Ads')
+plt.ylabel('Number of times each ad was selected')
+plt.show()
