@@ -8,6 +8,7 @@ import re
 import nltk
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
+from sklearn.feature_extraction.text import CountVectorizer
 # Importing the dataset
 df = read_csv('Restaurant_Reviews.tsv', delimiter = '\t', quoting = 3)
     
@@ -33,3 +34,21 @@ for i in range(1000): # there are 1000 reviews
                                         if word not in set(stopwords.words('english'))]
     review_cleaned = ' '.join(review_stemmed_and_without_unnecessary_words)
     corpus.append(review_cleaned)
+
+# =============================================================================
+# # when we execute the following line, we get a matrix of size 1000x1565 which may be\
+# # having irrelevant words not found in the stopwords. Irrelevant words are those which\
+# # are not common in all reviews. Such words increase the sparsity of the matrix\
+# # ie, such words increase the number of '0' entries in the matrix which is undesirable\
+# # for any ML algorithm. To overcome this, the CountVectorizer class comes with a\
+# # parameter that can limit the maximum number of features to be selected to make the\
+# # feature matrix. The parameter is called max_features
+# vectorizer = CountVectorizer()
+# X = vectorizer.fit_transform(corpus).toarray()
+# =============================================================================
+
+vectorizer = CountVectorizer(max_features = 1500) # we need to choose what value of\
+                                                # max_features would be best for the\
+                                                # dataset we have
+X = vectorizer.fit_transform(corpus).toarray()
+y = df.iloc[:, 1].values
