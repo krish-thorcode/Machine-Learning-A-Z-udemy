@@ -9,6 +9,8 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 from sklearn.feature_extraction.text import CountVectorizer
+from sklearn import preprocessing, model_selection, naive_bayes, metrics
+
 # Importing the dataset
 df = read_csv('Restaurant_Reviews.tsv', delimiter = '\t', quoting = 3)
     
@@ -52,3 +54,31 @@ vectorizer = CountVectorizer(max_features = 1500) # we need to choose what value
                                                 # dataset we have
 X = vectorizer.fit_transform(corpus).toarray()
 y = df.iloc[:, 1].values
+
+# Classification using Naive Bayes (for NLP, Naive Bayes Decision trees and Random\
+# Forest algorithms are used generally
+
+# Naive Bayes (copy pasting the implementation already done)
+# Dataset splitting
+X_train, X_test, y_train, y_test = model_selection.train_test_split(X, y,\
+                                                                  test_size = 0.20,\
+                                                                  random_state = 0)
+# =============================================================================
+# # Feature scaling --- not required for this problem bcoz features are 0s and 1s
+# scaler_X = preprocessing.StandardScaler()
+# X_train = scaler_X.fit_transform(X_train)
+# X_test = scaler_X.transform(X_test)
+# =============================================================================
+
+# Naive Bayes Classifier Model Fitting
+classifier = naive_bayes.GaussianNB()
+classifier = classifier.fit(X_train, y_train)
+
+y_predictions = classifier.predict(X_test)
+
+# Confusion matrix
+conf_matrix = metrics.confusion_matrix(y_test, y_predictions)
+print(conf_matrix)
+
+#values of correct predictions extracted from confusion matrix
+print("Accuracy on test set: (correct pred/total test egs): " + str((55+91)/200))
